@@ -1,0 +1,22 @@
+{
+  // Compiles the generated modules (generated/wmoop) and the hand-written ones (src) into dist/.
+  // generated/tsconfig.json checks the generated modules on their own, without Node.js types.
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["es2022"],
+    "module": "nodenext",
+    "types": ["node"],
+    "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
+    "rootDir": ".",
+    "outDir": "dist",
+    "sourceMap": true
+  },
+  "include": ["generated/wmoop", "src"]
+}

@@ -1,0 +1,32 @@
+name: Regenerate from upstream
+
+# Moves both submodule pins to upstream main, regenerates generated/, runs the tests, and opens
+# (or updates) one "chore(regen): ..." pull request through the wmoop-bot GitHub App. Runs when
+# wmoop.doc or wmoop.tools reports a green main, daily as a safety net, and by hand.
+on:
+  repository_dispatch:
+    types: [wmoop-upstream-updated]
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A newer run moves the pins further anyway, so it replaces an older one.
+concurrency:
+  group: regen
+  cancel-in-progress: true
+
+jobs:
+  regen:
+    uses: WMOOP/wmoop.tools/.github/workflows/binding.yml@main
+    with:
+      lang: typescript
+      mode: regen
+      node: true
+      build: npm ci && npm run build
+      test: npm test
+    secrets:
+      app-id: ${{ secrets.WMOOP_BOT_APP_ID }}
+      app-private-key: ${{ secrets.WMOOP_BOT_PRIVATE_KEY }}

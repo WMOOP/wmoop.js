@@ -1,0 +1,3 @@
+# Generator output: rewritten only by external/wmoop.tools/tools/regen_binding.py.
+# LF everywhere so the drift gate is byte-stable; collapsed in PR diffs on GitHub.
+generated/** text eol=lf linguist-generated=true

@@ -1,0 +1,5 @@
+# Node.js and the TypeScript build
+node_modules/
+dist/
+*.tsbuildinfo
+npm-debug.log*
