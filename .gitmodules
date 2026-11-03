@@ -1,0 +1,8 @@
+[submodule "doc"]
+	path = external/wmoop.doc
+	url = https://github.com/WMOOP/wmoop.doc.git
+	branch = main
+[submodule "tools"]
+	path = external/wmoop.tools
+	url = https://github.com/WMOOP/wmoop.tools.git
+	branch = main

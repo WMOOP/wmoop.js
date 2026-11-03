@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+# One shared pipeline for every binding (wmoop.tools/.github/workflows/binding.yml): the submodule
+# pins are on upstream main, generated/ matches them exactly, then build and tests.
+jobs:
+  binding:
+    uses: WMOOP/wmoop.tools/.github/workflows/binding.yml@main
+    with:
+      lang: typescript
+      node: true
+      build: npm ci && npm run build
+      test: npm test
