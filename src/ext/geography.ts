@@ -10,7 +10,7 @@
 import { extend } from "../../generated/wmoop/core.js";
 import { AdministrativeArea, City, Country, County } from "../../generated/wmoop/geography.js";
 
-/** Visitor hook, where behaviour over the composite lives. */
+/** Visitor hook, where behaviour over the composite lives. Concrete visitors are in src/patterns.ts. */
 export interface AreaVisitor {
   visitCountry(country: Country): void;
   visitCounty(county: County): void;

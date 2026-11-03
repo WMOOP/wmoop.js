@@ -8,14 +8,14 @@
 Programming*.**
 
 This is the **TypeScript twin** of [`wmoop.net`](https://github.com/WMOOP/wmoop.net) and
-[`wmoop.py`](https://github.com/WMOOP/wmoop.py): the *same* World Model, with the same domains and
-the same cross-domain `Person`→`Driver` example, in idiomatic TypeScript. It runs on Node.js, and the
-generated code uses only the language, so it runs in a browser too.
+[`wmoop.py`](https://github.com/WMOOP/wmoop.py): the *same* World Model, with the same domains, the
+same cross-domain `Person`→`Driver` example and the same design patterns, in idiomatic TypeScript.
+It runs on Node.js, and the generated code uses only the language, so it runs in a browser too.
 
 > The canonical model and all design documents live in
 > [`wmoop.doc`](https://github.com/WMOOP/wmoop.doc). The data classes here are **generated** from
 > the WML model by [`wmoop.tools`](https://github.com/WMOOP/wmoop.tools); this repo adds only the
-> behaviour, the demo and the runner of the shared conformance vectors.
+> behaviour, the design patterns, the demos and the runner of the shared conformance vectors.
 
 ## Parity with the other bindings
 
@@ -28,6 +28,10 @@ generated code uses only the language, so it runs in a browser too.
 | Enumerations | `enum` | `str` `Enum` | a frozen object of model ids, and a union type |
 | Roles by composition | `AddRole` / `GetRole<T>()` | `add_role` / `get_role(T)` | `addRole` / `getRole(T)` |
 | Relations, inverse kept in step | `Links<T>` and property setters | `LinkSet` and `One` / `Many` descriptors | set-like `Links<T>` and accessors |
+| Design patterns | `Wmoop.Patterns` and `Wmoop.Patterns.Demo` | `wmoop.patterns` and `patterns_demo.py` | `src/patterns.ts` and `src/patterns-demo.ts` |
+| Visitor hook | interface `IAreaVisitor` | `typing.Protocol` (`AreaVisitor`) | interface `AreaVisitor` |
+| Specification combinators | `.And()/.Or()/.Not()` | `&` / `\|` / `~` dunder operators | `.and()` / `.or()` / `.not()` methods |
+| Generics | `ISpecification<T>` | `Generic[T]` | `Specification<T>` |
 | Errors | `IWmoopError.Code` | `WmoopError.code` | `WmoopError.code` |
 | Conformance | `Wmoop.Tests` runs the shared vectors of `wmoop.doc` | `conformance.py` runs the same vectors | `src/conformance.ts` runs the same vectors |
 
@@ -48,7 +52,9 @@ wmoop.js/
 │   │   ├── nature.ts       # Person.ageOn
 │   │   ├── transport.ts    # describe / classification per vehicle kind, Driver.canDrive
 │   │   └── geography.ts    # AreaVisitor; totalPopulation and accept on the areas
+│   ├── patterns.ts         # Visitor, Specification, Builder, Strategy, Registry
 │   ├── demo.ts             # cross-domain roles + polymorphism walkthrough
+│   ├── patterns-demo.ts    # one section per design pattern, self-checking
 │   └── conformance.ts      # runs the shared conformance vectors from external/wmoop.doc
 ├── package.json            # build and test scripts; TypeScript and the Node.js types
 ├── tsconfig.json           # compiles generated/wmoop and src into dist/
@@ -64,8 +70,9 @@ clone with `--recurse-submodules` (or run `git submodule update --init`).
 npm ci
 npm run build          # tsc: generated/wmoop and src into dist/
 npm run demo
+npm run patterns-demo  # one section per design pattern; exits non-zero on failure
 npm run conformance    # the shared conformance vectors; exits non-zero on failure
-npm test               # both
+npm test               # all three
 ```
 
 ## Conformance

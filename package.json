@@ -2,7 +2,7 @@
   "name": "wmoop",
   "version": "0.1.0",
   "private": true,
-  "description": "The TypeScript binding of WMOOP: the World Model's data classes generated from wmoop.doc, plus hand-written behaviour, a demo and the conformance runner.",
+  "description": "The TypeScript binding of WMOOP: the World Model's data classes generated from wmoop.doc, plus hand-written behaviour, the design patterns, the demos and the conformance runner.",
   "license": "Apache-2.0",
   "repository": "github:WMOOP/wmoop.js",
   "type": "module",
@@ -13,7 +13,8 @@
     "build": "tsc -p .",
     "conformance": "node dist/src/conformance.js",
     "demo": "node dist/src/demo.js",
-    "test": "npm run conformance && npm run demo"
+    "patterns-demo": "node dist/src/patterns-demo.js",
+    "test": "npm run conformance && npm run demo && npm run patterns-demo"
   },
   "devDependencies": {
     "@types/node": "26.6.6",
